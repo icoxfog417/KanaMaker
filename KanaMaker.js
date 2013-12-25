@@ -6,7 +6,6 @@
       this.roma = [];
       this.HIRA_MATCHER = /[ぁ-ん]/g;
       this.KANA_MATCHER = /[ァ-ン]/g;
-      this.ROMA_MATCHER = /[Ａ-Ｚａ-ｚA-Za-z]/g;
     }
         
     KanaMaker.prototype.eval = function(e){            
@@ -15,7 +14,7 @@
 
       //check is pressed key alphabet.
       if(e.keyCode == 32){
-        if(text.substr(-1,1).match(/ |　/g)){ this.space();}
+        if(text.substr(text.length - 1,1).match(/ |　/g)){ this.space();}
         return false;
       }else if(!(65 <= e.keyCode && e.keyCode <= 90)){
         this.pre = text;
@@ -51,6 +50,11 @@
       this.hira.push("　");
       this.roma.push(" ");
     }
+    KanaMaker.prototype.clear = function(){
+      this.kana = [];
+      this.hira = [];
+      this.roma = [];
+    }
     KanaMaker.prototype._makeDiff = function(base,now){
       var samePart = "";
       for(var i = 0; i < now.length;i++){
@@ -70,10 +74,10 @@
       var names = this.roma.join("").split(" ");
       var result = "";
       for(var i = 0; i < names.length;i++){
-          result += names[i].substr(0,1).toUpperCase();
-          result += names[i].substr(1).toLowerCase() + " ";
+          result += ( i > 0 ? " " : "") + names[i].substr(0,1).toUpperCase();
+          result += names[i].substr(1).toLowerCase() ;
       }
-      return result.trim();
+      return result;
     }
 
     return KanaMaker;

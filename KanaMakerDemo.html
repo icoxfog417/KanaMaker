@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="./KanaMaker.js"></script>
+        <style>
+            label{
+                display:block;
+                width:65px;
+                float:left;
+                font-weight:bold;
+                margin-top:3px;
+            }
+            .txt{
+                float:left;
+                width:256px;
+            }
+            br,hr{
+                clear:both;
+            }
+        </style>
+        <script>
+            $(function(){    
+              var convertor = null;
+              $("#txtName").focus(function(e){
+                  convertor = new KanaMaker();
+              })
+
+              $("#txtName").keyup(function(e){
+                  if(convertor != null){
+                      convertor.eval(e);
+                      $("#txtKana").val(convertor.Kana());
+                      $("#txtHira").val(convertor.Hira());
+                      $("#txtRoma").val(convertor.Roma());
+                  }
+              })
+            })
+        </script>
+    </head>
+    <body>
+        <label>Name</label><input id="txtName" type="text" class="txt" />
+        <hr/>
+
+        <label>Kana</label><input id="txtKana" type="text" class="txt" />
+        <br/>
+        <label>Hira</label><input id="txtHira" type="text" class="txt" />
+        <br/>
+        <label>Roma</label><input id="txtRoma" type="text" class="txt" />
+        <br/>
+    </body>
+</html>
