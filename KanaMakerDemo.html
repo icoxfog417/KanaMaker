@@ -6,7 +6,7 @@
         <style>
             label{
                 display:block;
-                width:65px;
+                width:180px;
                 float:left;
                 font-weight:bold;
                 margin-top:3px;
@@ -15,6 +15,11 @@
                 float:left;
                 width:256px;
             }
+            .txt-part{
+                float:left;
+                width:123px;
+                margin-right:10px;
+            }
             br,hr{
                 clear:both;
             }
@@ -22,7 +27,7 @@
         <script>
             $(function(){    
               var convertor = null;
-              $("#txtName").focus(function(e){
+              $("#txtName").click(function(e){
                   convertor = new KanaMaker();
               })
 
@@ -32,6 +37,14 @@
                       $("#txtKana").val(convertor.Kana());
                       $("#txtHira").val(convertor.Hira());
                       $("#txtRoma").val(convertor.Roma());
+
+                      $("#txtKanaLast").val(convertor.Kana(true));
+                      $("#txtHiraLast").val(convertor.Hira(true));
+                      $("#txtRomaLast").val(convertor.Roma(true));
+                      $("#txtKanaFirst").val(convertor.Kana(false));
+                      $("#txtHiraFirst").val(convertor.Hira(false));
+                      $("#txtRomaFirst").val(convertor.Roma(false));
+
                   }
               })
             })
@@ -47,5 +60,13 @@
         <br/>
         <label>Roma</label><input id="txtRoma" type="text" class="txt" />
         <br/>
+        <label>Kana Separated</label><input id="txtKanaLast" type="text" class="txt-part" /><input id="txtKanaFirst" type="text" class="txt-part" />
+        <br/>
+        <label>Hira Separated</label><input id="txtHiraLast" type="text" class="txt-part" /><input id="txtHiraFirst" type="text" class="txt-part" />
+        <br/>
+        <label>Roma Separated</label><input id="txtRomaLast" type="text" class="txt-part" /><input id="txtRomaFirst" type="text" class="txt-part" />
+        <br/>
+
+
     </body>
 </html>

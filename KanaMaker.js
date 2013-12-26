@@ -64,20 +64,34 @@
       }
       return now.replace(samePart,"");
     }
-    KanaMaker.prototype.Kana = function(){
-      return this.kana.join("");
+
+    KanaMaker.prototype.getPart = function(name,isLast){ //姓・名のパートを指定して取得
+        if(isLast === undefined){//isLastの指定がない場合、そのまま返す
+            return name;
+        }else{
+            var splited = name.split(/ |　/g);
+            if(splited.length > 1){//姓・名の登録がある
+                return isLast ? splited[0] : splited[splited.length - 1];
+            }else{
+                return isLast ? name : "";
+            }
+        }
     }
-    KanaMaker.prototype.Hira = function(){
-      return this.hira.join("");
+
+    KanaMaker.prototype.Kana = function(isLast){
+      return this.getPart(this.kana.join(""),isLast);
     }
-    KanaMaker.prototype.Roma = function(){
+    KanaMaker.prototype.Hira = function(isLast){
+      return this.getPart(this.hira.join(""),isLast);
+    }
+    KanaMaker.prototype.Roma = function(isLast){
       var names = this.roma.join("").split(" ");
       var result = "";
       for(var i = 0; i < names.length;i++){
           result += ( i > 0 ? " " : "") + names[i].substr(0,1).toUpperCase();
           result += names[i].substr(1).toLowerCase() ;
       }
-      return result;
+      return this.getPart(result,isLast);
     }
 
     return KanaMaker;
